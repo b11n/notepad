@@ -81,6 +81,7 @@ body {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+    height: 20px;
 }
 
 .note.selected {

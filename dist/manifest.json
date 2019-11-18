@@ -1,0 +1,10 @@
+{
+  "name": "Notes",
+  "short_name": "Notes",
+  "description": "The world's best notes app and its free",
+  "start_url": "/?homescreen=1",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#2196F3",
+  "theme_color": "#2196F3"
+}
