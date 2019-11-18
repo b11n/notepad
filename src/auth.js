@@ -10,7 +10,7 @@ class Auth {
         return firebase.auth().signInWithPopup(this.provider).then(function (result) {
             var token = result.credential.accessToken;
             var user = result.user;
-           return user;
+            return user;
         }).catch(function (error) {
             console.log(error)
         });
@@ -30,7 +30,7 @@ class Auth {
                 if (user) {
                     resolve(user);
                 } else {
-                   resolve(null);
+                    resolve(null);
                 }
             });
         });

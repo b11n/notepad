@@ -29,14 +29,14 @@ signInButton.onclick = async (evt) => {
 async function getAuthn() {
     const user = await auth.getCurrentUser();
     loader.remove();
-    if(user) {
+    if (user) {
         signInButton.classList.add("hidden")
         loadDashboard(user);
-    }else {
+    } else {
         signInButton.classList.remove("hidden")
     }
 }
 async function loadDashboard(user) {
-    const {default: Dashboard} = await import('./dashboard.js')
-    new Dashboard(user,firebase);
+    const { default: Dashboard } = await import('./dashboard.js')
+    new Dashboard(user, firebase);
 }

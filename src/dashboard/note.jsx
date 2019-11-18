@@ -9,8 +9,8 @@ class Note extends React.Component {
         this.props.select(this.props.note, this.props.id)
     }
     render() {
-        const selectedCls = this.props.selected ? 'selected': ''
-        return <div className={"note "+selectedCls} onClick={this.clickHandler.bind(this)}>
+        const selectedCls = this.props.selected ? 'selected' : ''
+        return <div className={"note " + selectedCls} onClick={this.clickHandler.bind(this)}>
             <div className="note-title">
                 {this.props.note.title}
             </div>
