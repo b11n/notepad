@@ -74,6 +74,11 @@ body {
     padding: 4px 4px 4px 16px;
     border-bottom: 1px solid #c3c3c3;
     cursor: pointer;
+    position: relative;
+}
+
+.note:hover .icon-bin {
+  display: block;
 }
 
 .note-title {
@@ -120,6 +125,18 @@ body {
     border: 1px dashed #a7a7a7;
     border-radius: 14px;
     cursor: pointer;
+}
+
+.icon-bin {
+  display: none;
+  position: absolute;
+  right: 0;
+  padding: 10px;
+  color: #585858;
+}
+
+.icon-bin:hover{
+  color: #171717;
 }
 
 

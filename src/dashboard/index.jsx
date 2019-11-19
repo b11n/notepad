@@ -46,7 +46,7 @@ class Welcome extends React.Component {
         this.fetchFreshData();
     }
 
-    async componentWillMount() {
+    async componentDidMount() {
         const data = await this.props.database.readData();
         this.setState({
             list: this.objectToArray(data),
@@ -54,9 +54,9 @@ class Welcome extends React.Component {
         })
     }
 
-    async fetchFreshData() {
+    async fetchFreshData(reset) {
         const data = await this.props.database.readData();
-        this.setState({
+        return this.setState({
             list: this.objectToArray(data),
         })
     }
@@ -67,12 +67,20 @@ class Welcome extends React.Component {
         this.setState({ list });
     }
 
+    async deleteNote(id) {
+      await this.props.database.deleteData( id);
+      await this.fetchFreshData();
+      this.setState({
+        selected: 0
+      })
+    }
+
     render() {
         const arr = [];
         let selectedNote = this.state.list[this.state.selected];
         for (let i = 0; i < this.state.list.length; i++) {
             const selected = i == this.state.selected;
-            arr.push(<Note key={i} selected={selected} select={this.selectNote.bind(this)} note={this.state.list[i]} />);
+            arr.push(<Note key={i} selected={selected} delete={this.deleteNote.bind(this)} select={this.selectNote.bind(this)} note={this.state.list[i]} />);
         }
         return <div className="wrap">
             <div className="header">

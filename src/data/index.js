@@ -26,6 +26,11 @@ class Database {
         });
     }
 
+    deleteData(id) {
+      var userId = this.userId;
+      return this.firebase.database().ref('/users/' + userId + '/notes/' + id).set(null);
+    }
+
 
 }
 
