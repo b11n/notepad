@@ -19,7 +19,7 @@ const firebaseConfig = {
 const app = firebase.initializeApp(firebaseConfig);
 const auth = new Auth();
 
-new Dashboard(null, firebase);
+new Dashboard(null, firebase, auth);
 
 // getAuthn();
 

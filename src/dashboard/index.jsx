@@ -32,25 +32,17 @@ class Welcome extends React.Component {
         })
     }
 
-    objectToArray(obj) {
-        const arr = [];
-        for (let key in obj.notes) {
-            let selected = Object.assign({}, obj.notes[key]);
-            selected.id = key;
-            arr.push(selected)
-        }
-        return arr;
-    }
-
     async save(note, id, newNote) {
         const resp = await this.props.database.writeData(note, id, newNote);
         this.fetchFreshData();
     }
 
     async componentDidMount() {
+        await this.getAuthn();
+        this.props.database.init();
         const data = await this.props.database.readData();
         this.setState({
-            list: this.objectToArray(data),
+            list: data,
             selected: 0
         })
     }
@@ -58,7 +50,7 @@ class Welcome extends React.Component {
     async fetchFreshData(reset) {
         const data = await this.props.database.readData();
         return this.setState({
-            list: this.objectToArray(data),
+            list: data,
         })
     }
 
@@ -68,8 +60,13 @@ class Welcome extends React.Component {
         this.setState({ list });
     }
 
-    signIn() {
+    async getAuthn() {
+        const user = await this.props.auth.getCurrentUser();
+        this.setState({user});
+    }
 
+    async signIn(e) {
+        await this.props.auth.signIn();
     }
 
     async deleteNote(id) {
@@ -90,7 +87,7 @@ class Welcome extends React.Component {
         return <div className="wrap">
             <div className="header">
                 Notes
-                <Button onClick={this.signIn.bind(this)}/>
+                <Button onClick={this.signIn.bind(this)} user={this.state.user}/>
             </div>
             <div className="dashboard">
                 <div className="sidebar">
