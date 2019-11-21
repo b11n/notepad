@@ -1,6 +1,7 @@
 import React from 'react';
 import Editor from './editor.jsx';
 import Note from './note.jsx';
+import Button from './signInButton.jsx';
 
 class Welcome extends React.Component {
     constructor(props) {
@@ -31,33 +32,25 @@ class Welcome extends React.Component {
         })
     }
 
-    objectToArray(obj) {
-        const arr = [];
-        for (let key in obj.notes) {
-            let selected = Object.assign({}, obj.notes[key]);
-            selected.id = key;
-            arr.push(selected)
-        }
-        return arr;
-    }
-
     async save(note, id, newNote) {
         const resp = await this.props.database.writeData(note, id, newNote);
         this.fetchFreshData();
     }
 
-    async componentWillMount() {
+    async componentDidMount() {
+        await this.getAuthn();
+        this.props.database.init();
         const data = await this.props.database.readData();
         this.setState({
-            list: this.objectToArray(data),
+            list: data,
             selected: 0
         })
     }
 
-    async fetchFreshData() {
+    async fetchFreshData(reset) {
         const data = await this.props.database.readData();
-        this.setState({
-            list: this.objectToArray(data),
+        return this.setState({
+            list: data,
         })
     }
 
@@ -67,16 +60,34 @@ class Welcome extends React.Component {
         this.setState({ list });
     }
 
+    async getAuthn() {
+        const user = await this.props.auth.getCurrentUser();
+        this.setState({user});
+    }
+
+    async signIn(e) {
+        await this.props.auth.signIn();
+    }
+
+    async deleteNote(id) {
+      await this.props.database.deleteData( id);
+      await this.fetchFreshData();
+      this.setState({
+        selected: 0
+      })
+    }
+
     render() {
         const arr = [];
         let selectedNote = this.state.list[this.state.selected];
         for (let i = 0; i < this.state.list.length; i++) {
             const selected = i == this.state.selected;
-            arr.push(<Note key={i} selected={selected} select={this.selectNote.bind(this)} note={this.state.list[i]} />);
+            arr.push(<Note key={i} selected={selected} delete={this.deleteNote.bind(this)} select={this.selectNote.bind(this)} note={this.state.list[i]} />);
         }
         return <div className="wrap">
             <div className="header">
                 Notes
+                <Button onClick={this.signIn.bind(this)} user={this.state.user}/>
             </div>
             <div className="dashboard">
                 <div className="sidebar">

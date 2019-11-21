@@ -1,6 +1,6 @@
 import * as firebase from 'firebase';
 import Auth from './auth';
-
+import Dashboard from './dashboard.js'
 const signInButton = document.getElementById("signIn");
 const loader = document.getElementById("loader");
 
@@ -19,24 +19,26 @@ const firebaseConfig = {
 const app = firebase.initializeApp(firebaseConfig);
 const auth = new Auth();
 
-getAuthn();
+new Dashboard(null, firebase, auth);
 
-signInButton.onclick = async (evt) => {
-    const user = await auth.signIn();
-    getAuthn();
-}
+// getAuthn();
 
-async function getAuthn() {
-    const user = await auth.getCurrentUser();
-    loader.remove();
-    if (user) {
-        signInButton.classList.add("hidden")
-        loadDashboard(user);
-    } else {
-        signInButton.classList.remove("hidden")
-    }
-}
-async function loadDashboard(user) {
-    const { default: Dashboard } = await import('./dashboard.js')
-    new Dashboard(user, firebase);
-}
+// signInButton.onclick = async (evt) => {
+//     const user = await auth.signIn();
+//     getAuthn();
+// }
+
+// async function getAuthn() {
+//     const user = await auth.getCurrentUser();
+//     loader.remove();
+//     if (user) {
+//         signInButton.classList.add("hidden")
+//         loadDashboard(user);
+//     } else {
+//         signInButton.classList.remove("hidden")
+//     }
+// }
+// async function loadDashboard(user) {
+//     const { default: Dashboard } = await import('./dashboard.js')
+//     new Dashboard(user, firebase);
+// }

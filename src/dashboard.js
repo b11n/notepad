@@ -5,14 +5,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 class Dashboard {
-    constructor(user, firebase) {
+    constructor(user, firebase, auth) {
         this.database = new Database(firebase);
+        this.auth = auth;
         this.render();
     }
 
     async render() {
-        const data = await this.database.readData();
-        const element = <Welcome database={this.database} />;
+        const element = <Welcome database={this.database} auth={this.auth} />;
         ReactDOM.render(
             element,
             document.getElementById('root')

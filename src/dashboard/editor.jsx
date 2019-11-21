@@ -5,6 +5,9 @@ class Editor extends React.Component {
         super(props);
         this.textInput = React.createRef();
     }
+    componentDidUpdate() {
+      this.textInput.current.focus()
+     }
     save() {
         const { value } = this.textInput.current;
         const note = {
