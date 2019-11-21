@@ -1,6 +1,7 @@
 import React from 'react';
 import Editor from './editor.jsx';
 import Note from './note.jsx';
+import Button from './signInButton.jsx';
 
 class Welcome extends React.Component {
     constructor(props) {
@@ -67,6 +68,10 @@ class Welcome extends React.Component {
         this.setState({ list });
     }
 
+    signIn() {
+
+    }
+
     async deleteNote(id) {
       await this.props.database.deleteData( id);
       await this.fetchFreshData();
@@ -85,6 +90,7 @@ class Welcome extends React.Component {
         return <div className="wrap">
             <div className="header">
                 Notes
+                <Button onClick={this.signIn.bind(this)}/>
             </div>
             <div className="dashboard">
                 <div className="sidebar">

@@ -11,7 +11,6 @@ class Dashboard {
     }
 
     async render() {
-        const data = await this.database.readData();
         const element = <Welcome database={this.database} />;
         ReactDOM.render(
             element,
