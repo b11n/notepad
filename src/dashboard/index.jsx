@@ -2,11 +2,13 @@ import React from 'react';
 import Editor from './editor.jsx';
 import Note from './note.jsx';
 import Button from './signInButton.jsx';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 class Welcome extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            loading: true,
             list: [],
         }
     }
@@ -33,7 +35,9 @@ class Welcome extends React.Component {
     }
 
     async save(note, id, newNote) {
+        this.setState({loading: true});
         const resp = await this.props.database.writeData(note, id, newNote);
+        this.setState({loading: false});
         this.fetchFreshData();
     }
 
@@ -43,7 +47,8 @@ class Welcome extends React.Component {
         const data = await this.props.database.readData();
         this.setState({
             list: data,
-            selected: 0
+            selected: 0,
+            loading: false,
         })
     }
 
@@ -78,10 +83,12 @@ class Welcome extends React.Component {
     }
 
     async deleteNote(id) {
+      this.setState({loading: true});
       await this.props.database.deleteData( id);
       await this.fetchFreshData();
       this.setState({
-        selected: 0
+        selected: 0,
+        loading: false,
       })
     }
 
@@ -97,6 +104,8 @@ class Welcome extends React.Component {
                 Notes
                 <Button signOut={this.signOut.bind(this)} onClick={this.signIn.bind(this)} user={this.state.user}/>
             </div>
+
+            {this.state.loading? <LinearProgress />:<div className="loader-placeholder"></div>}
             <div className="dashboard">
                 <div className="sidebar">
                     {arr}

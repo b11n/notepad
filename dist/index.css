@@ -78,6 +78,10 @@ body {
   position: relative;
 }
 
+.loader-placeholder {
+  min-height: 4px;
+}
+
 .note:hover .icon-bin {
   display: block;
 }
