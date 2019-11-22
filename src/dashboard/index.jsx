@@ -72,6 +72,14 @@ class Welcome extends React.Component {
 
     async signIn(e) {
         await this.props.auth.signIn();
+        // TODO(b11n): Remove the reload
+        location.reload();
+    }
+
+    async signOut () {
+        // TODO(b11n): Remove the reload
+        await this.props.auth.signOut();
+        location.reload();
     }
 
     async deleteNote(id) {
@@ -94,7 +102,7 @@ class Welcome extends React.Component {
         return <div className="wrap">
             <div className="header">
                 Notes
-                <Button onClick={this.signIn.bind(this)} user={this.state.user}/>
+                <Button signOut={this.signOut.bind(this)} onClick={this.signIn.bind(this)} user={this.state.user}/>
             </div>
 
             {this.state.loading? <LinearProgress />:<div className="loader-placeholder"></div>}
