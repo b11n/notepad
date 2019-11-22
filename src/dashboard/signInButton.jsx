@@ -22,7 +22,7 @@ export default function ContainedButtons(props) {
 
   let dom;
   if (props.user) {
-    dom = <img src={props.user.photoURL} className={classes.img} />;
+    dom = <img src={props.user.photoURL} className={classes.img}  onClick={props.signOut} />;
   } else {
     dom = <Button variant="contained" color="primary" className={classes.button} onClick={props.onClick}>
       Sign In
