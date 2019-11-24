@@ -76,6 +76,14 @@ body {
   border-bottom: 1px solid #c3c3c3;
   cursor: pointer;
   position: relative;
+  width: 100%;
+  text-align: left;
+}
+
+.toolBar {
+  background: #f3f3f3;
+  color: #545454;
+  padding-left: 8px;
 }
 
 .loader-placeholder {
@@ -106,6 +114,7 @@ body {
   width: 100%;
   font-size: 18px;
   padding: 8px;
+  padding-left: 16px;
 }
 
 .editor textarea {
@@ -159,6 +168,19 @@ body {
 
 .lds-ripple div:nth-child(2) {
   animation-delay: -0.5s;
+}
+
+.not-selected {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: 48px;
+  color: #c5c5c5;
+}
+
+.listItem {
+  width: 100%;
 }
 
 @keyframes lds-ripple {
