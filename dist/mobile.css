@@ -12,5 +12,12 @@
     display: block;
     width: 100%;
     position: absolute;
-    height: 100%;
+    height: calc(100% - 110px);
+}
+
+.toolBar {
+  display: block;
+  background: #f3f3f3;
+  color: #545454;
+  padding-left: 8px;
 }

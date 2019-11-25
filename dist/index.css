@@ -80,10 +80,13 @@ body {
   text-align: left;
 }
 
+.right-pane {
+  width: 100%;
+  display: flex;
+}
+
 .toolBar {
-  background: #f3f3f3;
-  color: #545454;
-  padding-left: 8px;
+  display: none;
 }
 
 .loader-placeholder {
@@ -128,10 +131,16 @@ body {
   /*remove the resize handle on the bottom right*/
 }
 
+.newItem {
+  border-radius: 14px;
+  width: 100%;
+  margin-top: 12px;
+}
+
 .new {
+  width: 100%;
   text-align: center;
   padding: 8px;
-  margin: 12px;
   border: 1px dashed #a7a7a7;
   border-radius: 14px;
   cursor: pointer;

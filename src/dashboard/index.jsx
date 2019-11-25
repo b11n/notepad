@@ -4,6 +4,7 @@ import Note from './note.jsx';
 import Button from './signInButton.jsx';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ButtonBase from '@material-ui/core/ButtonBase';
 
 class Welcome extends React.Component {
     constructor(props) {
@@ -114,9 +115,11 @@ class Welcome extends React.Component {
             <div className="dashboard">
                 <div className="sidebar">
                     {arr}
-                    <div className="new" onClick={this.newNote.bind(this)}>
-                        New Note
-                    </div>
+                    <ButtonBase classes={{root: "newItem"}}>
+                      <div className="new" onClick={this.newNote.bind(this)}>
+                          New Note
+                      </div>
+                    </ButtonBase>
                 </div>
                 <div className={"right-pane "+showRightPane}>
                     <div className="toolBar">
